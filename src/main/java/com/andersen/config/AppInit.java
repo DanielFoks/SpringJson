@@ -2,7 +2,6 @@ package com.andersen.config;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
-import javax.servlet.ServletRegistration;
 import javax.transaction.Transactional;
 
 @Transactional
@@ -26,11 +25,5 @@ public class AppInit extends AbstractAnnotationConfigDispatcherServletInitialize
     @Override
     protected String[] getServletMappings() {
         return new String[]{"/"};
-    }
-
-    @Override
-    protected void customizeRegistration(ServletRegistration.Dynamic registration) {
-        boolean done = registration.setInitParameter("throwExceptionIfNoHandlerFound", "true");
-        if (!done) throw new RuntimeException();
     }
 }

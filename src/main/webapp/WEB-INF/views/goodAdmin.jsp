@@ -68,7 +68,7 @@
 
         $.getJSON("goodAdminList", function (result) {
             $.each(result, function (i, field) {
-                good = JSON.stringify(field);
+                good = JSON.stringify(field.id);
 
                 let test = document.createElement('td');
                 test.innerHTML = "<td><input type='button' value='DELETE'/></td>";

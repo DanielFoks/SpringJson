@@ -11,6 +11,8 @@ import java.util.List;
 @Entity
 public class Customer implements Serializable {
 
+    //serial version
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;

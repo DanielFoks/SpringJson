@@ -20,8 +20,6 @@
 <a href="<c:url value="/customer"/>">Customer</a>
 
 
-
-
 <br/>
 </body>
 </html>

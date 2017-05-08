@@ -1,5 +1,7 @@
 package com.andersen.jsonControllers;
 
+import com.andersen.aspectLog.CustomLogger;
+import com.andersen.aspectLog.Loggable;
 import com.andersen.repositories.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,21 +18,33 @@ public class RedirectController {
     @Autowired
     CustomerRepository customerService;
 
+    @Autowired
+    CustomLogger customLogger;
+
+    @Loggable
     @RequestMapping(value = "customer", method = RequestMethod.GET)
     public String customersPage() {
+
+        customLogger.test("param1");
+
         return "customer";
     }
 
+    @Loggable(level = Loggable.LogLevel.ERROR)
     @RequestMapping(value = "administrator", method = RequestMethod.GET)
     public String administratorsPage() {
         return "administrator";
     }
 
+
+    @Loggable
     @RequestMapping(value = "customerAdmin", method = RequestMethod.GET)
     public String customerAdminPage() {
         return "customerAdmin";
     }
 
+
+    @Loggable
     @RequestMapping(value = "customerSuccess", method = RequestMethod.GET)
     public String customerSuccessPage() {
         return "customerSuccess";

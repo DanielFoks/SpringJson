@@ -6,6 +6,7 @@ import com.andersen.entities.OrderT;
 import com.andersen.repositories.CustomerRepository;
 import com.andersen.repositories.GoodRepository;
 import com.andersen.repositories.OrderRepository;
+import jdk.nashorn.internal.runtime.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -35,6 +36,7 @@ public class AdministratorRestController {
         return customerRepository.findAll();
     }
 
+    @Logger
     @PostMapping("/customerAdmin/add/")
     public ResponseEntity<Customer> addCustomer(@RequestBody Customer customer) {
         if (customer.getId() == 0) {
@@ -57,15 +59,12 @@ public class AdministratorRestController {
     //--------------Goods------------------
 
     @GetMapping("goodAdminList")
-    public
-    @ResponseBody
-    List<Good> goodsList() {
+    public List<Good> goodsList() {
         return goodRepository.findAll();
     }
 
     @PostMapping("/goodAdmin/add/")
-    public ResponseEntity<Good> addCustomer(@RequestBody Good good) {
-        System.out.println(good);
+    public ResponseEntity<Good> addGood(@RequestBody Good good) {
         if (good.getId() == 0) {
             goodRepository.save(good);
         }
@@ -73,9 +72,9 @@ public class AdministratorRestController {
     }
 
     @PostMapping(value = "/goodAdmin/remove/")
-    public ResponseEntity<Good> removeCustomer(@RequestBody Good good) {
-        goodRepository.delete(good);
-        return new ResponseEntity<>(good, HttpStatus.OK);
+    public ResponseEntity<Integer> removeGood(@RequestBody Integer id) {
+        goodRepository.delete(id);
+        return new ResponseEntity<>(id, HttpStatus.OK);
     }
 
     //-------------------------------------
@@ -83,15 +82,12 @@ public class AdministratorRestController {
     //--------------Order------------------
 
     @GetMapping("orderAdminList")
-    public
-    @ResponseBody
-    List<OrderT> ordersList() {
+    public List<OrderT> ordersList() {
         return orderRepository.findAll();
     }
 
     @PostMapping(value = "/orderAdmin/remove/")
-    public ResponseEntity<OrderT> removeCustomer(@RequestBody OrderT orderT) {
-        System.err.println(orderT);
+    public ResponseEntity<OrderT> removeOrder(@RequestBody OrderT orderT) {
         orderRepository.delete(orderT);
         return new ResponseEntity<>(orderT, HttpStatus.OK);
     }
